@@ -4,36 +4,42 @@ var city = $("#searchTerm").val();
 var apiKey = "&appid=914485892723c5602584058c5fb75322";
 // get today date without time
 var date = new Date();
+//store the value of the search history in array
+var searchHistory = [];
 
-//var cityAgain = $("prevCity").text(city);
-
-var previousCity = $("#prevCity")
-
-//when click on previous city reload current conditions and forecast
-previousCity.on("click", function(){
-  console.log("this button is clicked")
-
-});
-
-// $("#prevCity").click(function() {
-//   var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityAgain + apiKey;
-
-//   $.ajax({
-//     url: queryUrl,
-//     method: "GET"
-//   })
-//  .then(function (response){  
-//   getCurrentConditions(response);
-//   getCurrentForecast(response);
-// })
-// });
 
 //add function to list previous search terms
 function makeList() {
+
+for (var index = searchHistory.length - 1; index >= 0; index--) {
   //var to create <li> and add class and id to each
-  var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCity');
+  // var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
+  var listItem = $("<button>").addClass("list-group-item againSearch").attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
+
+  $(listItem).text(searchHistory[index]);
 
   $(".list").append(listItem);
+
+ }
+
+  var citySearched = $("#prevCityBtn").text();
+
+  $("#prevCityBtn").click(function() {
+
+    // $('#activeCity').empty();
+    // $('#forecast').empty();
+
+    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearched + apiKey;
+  
+    $.ajax({
+      url: queryUrl,
+      method: "GET"
+    })
+   .then(function (response){  
+    getCurrentConditions(response);
+    getCurrentForecast(response);
+  })
+  });
 
   // var listItemLength = listItem.length;
   // //alert user they have exceeded the maximum limit of search terms
@@ -141,6 +147,28 @@ $("#searchBtn").on("click", function() {
 
     })
   });
+
+ 
+function setHistory (cityHistory){
+  //if there is no search term stop function
+ if (searchHistory.indexOf(cityHistory) !== -1) {
+   return;
+ } 
+ //append new search term to the array and returns the new length
+ searchHistory.push(cityHistory);
+ localStorage.setItem("cityKey", JSON.stringify(searchHistory)) //this refers to the search history array
+ makeList();
+}
+
+function getHistory() {
+  var savedCities = localStorage.getItem("cityKey")
+
+  if (savedCities) {
+    searchHistory = JSON.parse(savedCities)
+  }
+  makeList();
+}
+
 
   //TODO: update if statement in Function makeList to end function when prevCity list reaches 5 
   //TODO: add function to load corresponding weather when click prev search terms
