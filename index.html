@@ -1,84 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--Insert Bootstrap CSS here-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
-    <!--Insert Google fonts API here-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!--Insert local stylesheet-->
-    <link src="./assets/style.css" />
-    <title>Weather You're Here or There</title>
-  </head>
-  <body>
-    <!--Start with Navbar-->
-    <nav class="navbar navbar-dark bg-primary">
-      <!--Navbar Content-->
-      <a class="navbar-brand ms-3" href="#"
-        ><i class="material-icons">outdoor_grill</i>&nbsp;Weather where you
-        are!</a
-      >
-    </nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/ca89a4b9f5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
 
-    <!--Weather Content Start Here-->
-    <div class="container-fluid">
-      <!--Search container here-->
-      <div class="row ms-0.5 mt-5">
-        <!--Search Input here-->
-        <div class="col-3 searcharea">
-          <h2 class="h2">Search for a City</h2>
-          <!--div to group button and input together-->
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="searchinput"
-              type="search"
-              aria-label="Search"
-            />
-            <button class="btn btn-primary" id="searchbtn" type="submit">
-              <i class="material-icons">search</i>
-            </button>
-          </div>
+    <!-- Heading container here, all the components are available within the container -->
+    <div class="bg-primary pt-2 pb-2"> 
+        <div class="container">
+            <h3 class="text-start text-white">Weather You're Here or There</h3>
         </div>
-        <!--Search History Here-->
-        <div class="mt-5" id="searchHistory"></div>
-      </div>
-
-      <!--Search results container here-->
-      <div class="col-9">
-        <div class="container-fluid" id="forecast"></div>
-        <!--Weather for current location here-->
-      </div>
     </div>
+    <!-- End Main heading -->
 
-    <!--Insert JavaScript here-->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- Start to hold the search UI and history UI -->
+    <div class="container-fluid"> 
+
+        <!-- Start row -->
+        <div class="row"> 
+
+            <!-- Start column, set to take 1/4th of the space -->
+            <div class="col-md-3 bg-light pt-3 pb-3"> 
+
+                <h5>Search for a City:</h5>
+
+                <!-- Start input group, make form with search button adjacent to input -->
+                <div class="input-group mb-3"> 
+                    <input id="searchTerm" type="text" class="form-control" placeholder="ex. New York City" class="input-group-append">
+                    <button id="searchBtn" class="btn btn-primary" type="button" id="button-addon2"><i class="far fa-search"></i></button>
+                </div>
+                <!-- End input group -->   
+
+                <!-- Start card, leave blank and set UL -->
+                <div class="card list-cities"> 
+                    <ul class="list-group list-group-flush list">
+                    </ul>
+                </div> 
+                <!-- End card -->
+            </div> 
+            <!-- This ends the column -->
+
+            <!-- Start column, set to take 3/4 of the space -->
+            <div class="col-md-9"> 
+                <div id="activeCity" class="mt-4">
+                    
+                </div>
+            </div> 
+            <!-- This ends the column -->
+        </div> 
+        <!-- This ends the row -->
+
+        <!-- Start forecast row, leave blank and set dynamically -->
+        <div class="mt-4 col-md-12"> 
+
+            <h5 id="forecastH5" class="mt-3 hide">5-Day Forecast:</h5>
+
+            <!-- Start row where forecast cards will show -->
+            <div id="forecast" class="row"> 
+
+
+            </div> 
+           <!-- This ends the row -->
+        </div> 
+        <!-- End forecast container -->
+    </div> 
+    <!-- This ends container -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/script.js"></script>
-  </body>
+</body>
 </html>
