@@ -5,10 +5,12 @@ var apiKey = "&appid=914485892723c5602584058c5fb75322";
 // get today date without time
 var date = new Date();
 
-var cityAgain = $("prevCity").val();
+//var cityAgain = $("prevCity").text(city);
+
+var previousCity = $("#prevCity")
 
 //when click on previous city reload current conditions and forecast
-$("prevCity").on("click", function(){
+previousCity.on("click", function(){
   console.log("this button is clicked")
 
 });
@@ -23,7 +25,6 @@ $("prevCity").on("click", function(){
 //  .then(function (response){  
 //   getCurrentConditions(response);
 //   getCurrentForecast(response);
-//   makeList();
 // })
 // });
 
@@ -31,14 +32,17 @@ $("prevCity").on("click", function(){
 function makeList() {
   //var to create <li> and add class and id to each
   var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCity');
-  var listItemLength = listItem.length;
-  //alert user they have exceeded the maximum limit of search terms
-  if (listItemLength === 1){
-    console.log("success");
-  } else {
-      //append list item to ul element on html
-    $(".list").append(listItem);
-  }
+
+  $(".list").append(listItem);
+
+  // var listItemLength = listItem.length;
+  // //alert user they have exceeded the maximum limit of search terms
+  // if (listItemLength === 1){
+  //   console.log("success");
+  // } else {
+  //     //append list item to ul element on html
+  //   $(".list").append(listItem);
+  // }
 };
 
 //function to create a div with api data to display as main card and current weather
@@ -85,10 +89,6 @@ function getCurrentForecast () {
     var results = response.list;
     console.log(results)
     
-    //declare start date to check against
-    // startDate = 20
-    //have end date, endDate = startDate + 5
-
     for (var i = 0; i < results.length; i++) {
 
       if(results[i].dt_txt.indexOf("12:00:00") !== -1){
