@@ -8,15 +8,30 @@ var date = new Date();
 var searchHistory = [];
 
 
+//TODO: add function to list previous search terms
+//function makeList() {
+
 //add function to list previous search terms
 function makeList() {
+  //var to create <li> and add class and id to each
+  var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCity');
+  $(".list").append(listItem);
+  // var listItemLength = listItem.length;
+  // //alert user they have exceeded the maximum limit of search terms
+  // if (listItemLength === 1){
+  //   console.log("success");
+  // } else {
+  //     //append list item to ul element on html
+  //   $(".list").append(listItem);
+  // }
 
 for (var index = searchHistory.length - 1; index >= 0; index--) {
   //var to create <li> and add class and id to each
-   var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
-  //var listItem = $("<button>").addClass("list-group-item againSearch").attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
+  // var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
+  var listItem = $("<button>").addClass("list-group-item againSearch").attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
 
-  //$(listItem).text(searchHistory[index]);
+  //set for local storage
+  $(listItem).text(searchHistory[index]);
 
   $(".list").append(listItem);
 
