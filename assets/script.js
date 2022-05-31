@@ -13,10 +13,10 @@ function makeList() {
 
 for (var index = searchHistory.length - 1; index >= 0; index--) {
   //var to create <li> and add class and id to each
-  // var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
-  var listItem = $("<button>").addClass("list-group-item againSearch").attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
+   var listItem = $("<button>").addClass("list-group-item againSearch").text(city).attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
+  //var listItem = $("<button>").addClass("list-group-item againSearch").attr("id",'prevCityBtn').attr("type", "button").attr("data-search", searchHistory[index]);
 
-  $(listItem).text(searchHistory[index]);
+  //$(listItem).text(searchHistory[index]);
 
   $(".list").append(listItem);
 
@@ -170,6 +170,6 @@ function getHistory() {
 }
 
 
-  //TODO: update if statement in Function makeList to end function when prevCity list reaches 5 
-  //TODO: add function to load corresponding weather when click prev search terms
-  //TODO: 
+  //TODO: push search terms to the array
+  //TODO: get local Storage functioning
+  //TODO: allow multiple buttons in the history container to work
